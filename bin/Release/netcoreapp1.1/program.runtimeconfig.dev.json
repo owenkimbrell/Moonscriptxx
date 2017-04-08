@@ -1,0 +1,7 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/lynxishdevelop/.nuget/packages"
+    ]
+  }
+}
