@@ -58,10 +58,12 @@ installerr = {
         cmdnB:copyMach(tfil, "/usr/local/bin")
       elseif tfil == "moonstatic" then
         cmdnB:copyMach(tfil, "/usr/local/bin")
+        os.execute("sudo chmod +x /usr/local/bin/moonstatic")
       elseif tfil == "Release" then
         os.execute("sudo cp -r Release/* /usr/local/lib/moonxxx")
       elseif tfil == "moonXx" then
         os.execute("sudo cp moonXx/moonxx /usr/local/bin")
+        os.execute("sudo chmod +x /usr/local/bin/moonxx")
       end
     end
   end,

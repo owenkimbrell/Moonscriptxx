@@ -46,10 +46,12 @@ installerr = {
                 cmdnB\copyMach tfil, "/usr/local/bin"
             elseif tfil == "moonstatic"
                 cmdnB\copyMach tfil, "/usr/local/bin"
+                os.execute("sudo chmod +x /usr/local/bin/moonstatic")
 	        elseif tfil == "Release"
 		        os.execute "sudo cp -r Release/* /usr/local/lib/moonxxx" 
             elseif tfil == "moonXx"
                 os.execute "sudo cp moonXx/moonxx /usr/local/bin"
+                os.execute("sudo chmod +x /usr/local/bin/moonxx")
     makersMark: =>
         mods\getFilesInDir libinstalldir .. "/mnxx"
         for tdirs in *targetFiles
