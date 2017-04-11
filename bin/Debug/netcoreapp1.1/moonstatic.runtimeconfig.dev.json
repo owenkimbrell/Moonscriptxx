@@ -1,0 +1,8 @@
+{
+  "runtimeOptions": {
+    "additionalProbingPaths": [
+      "/home/lynxishdevelop/.nuget/packages",
+      "/home/lynxishdevelop/.dotnet/NuGetFallbackFolder"
+    ]
+  }
+}

@@ -1,0 +1,8 @@
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/bin/Release/netcoreapp1.1/moonstatic.deps.json
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/bin/Release/netcoreapp1.1/moonstatic.runtimeconfig.json
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/bin/Release/netcoreapp1.1/moonstatic.runtimeconfig.dev.json
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/bin/Release/netcoreapp1.1/moonstatic.dll
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/bin/Release/netcoreapp1.1/moonstatic.pdb
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/obj/Release/netcoreapp1.1/moonstatic.AssemblyInfo.cs
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/obj/Release/netcoreapp1.1/moonstatic.dll
+/home/lynxishdevelop/sources/projects/moonstatic/moonstatic/obj/Release/netcoreapp1.1/moonstatic.pdb
