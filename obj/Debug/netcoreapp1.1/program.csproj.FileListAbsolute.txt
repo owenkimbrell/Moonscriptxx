@@ -1,8 +1,0 @@
-/home/lynxishdevelop/sources/projects/moonstatic/program/bin/Debug/netcoreapp1.1/program.deps.json
-/home/lynxishdevelop/sources/projects/moonstatic/program/bin/Debug/netcoreapp1.1/program.runtimeconfig.json
-/home/lynxishdevelop/sources/projects/moonstatic/program/bin/Debug/netcoreapp1.1/program.runtimeconfig.dev.json
-/home/lynxishdevelop/sources/projects/moonstatic/program/bin/Debug/netcoreapp1.1/program.dll
-/home/lynxishdevelop/sources/projects/moonstatic/program/bin/Debug/netcoreapp1.1/program.pdb
-/home/lynxishdevelop/sources/projects/moonstatic/program/obj/Debug/netcoreapp1.1/program.AssemblyInfo.cs
-/home/lynxishdevelop/sources/projects/moonstatic/program/obj/Debug/netcoreapp1.1/program.dll
-/home/lynxishdevelop/sources/projects/moonstatic/program/obj/Debug/netcoreapp1.1/program.pdb
