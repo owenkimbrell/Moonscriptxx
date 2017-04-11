@@ -10,9 +10,21 @@ DOES It WORK DUDE? Yes. But its not 100% simple yet. for instance
 moonxx -c will compile all moonscript found in directory to a executable.
 
 
-HOW TO USE
-install .net core. Soon this will be unessecary but for now just pre-install it.
+HOW TO INSTALL AND USE
+
 git clone https://github.com/owenkimbrell/Moonscriptxx/edit/master/
+
+install .net core. Soon this will be unessecary but for now just pre-install it.
+
+install luarocks AND OR clone the repo into mnxx/ (name cloned repo 'luarocks')
+
+install luastatic AND OR clone the repo into mnxx/ (name cloned repo 'luastatic')
+
+install moonscript AND OR clone the repo into mnxx/ (name cloned repo 'moonscript')
+
+AFTER CLONING AND OR INSTALLING REPOS AND MOONSCRIPT++ copy the mnxx directory(containing chosen resources into the installer dir)
+
+after mnxx dir is inside installer dir
 
 cd into the installer directory
 ./installer
