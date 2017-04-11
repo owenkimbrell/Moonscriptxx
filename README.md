@@ -1,7 +1,7 @@
 Moonscript++ - Standalone executable compiler for Moonscript(By Leafo)
 Compiler uses Luastatic(By ers53)
 
-How to install
+How to install || 
 Download .net core SDK/Runtime version 1.1.1
 
 Ubuntu 16.10(SDK)
@@ -18,12 +18,14 @@ ____________________
 
 Fedora 24(SDK)
 https://go.microsoft.com/fwlink/?linkid=843461 (.tar.gz)
+
 (Instructions)
 https://www.microsoft.com/net/core#linuxfedora
 ____________________
 
 Debian 8(SDK)
 https://go.microsoft.com/fwlink/?linkid=843453 (.tar.gz)
+
 (Instructions)
 https://www.microsoft.com/net/core#linuxdebian
 ____________________
@@ -34,12 +36,14 @@ _____________________
 
 openSUSE 42.1(SDK)
 https://go.microsoft.com/fwlink/?linkid=843451 (tar.gz)
+
 (Instructions)
 https://www.microsoft.com/net/core#linuxopensuse
 ______________________
 
 openSUSE 13.2(SDK)
 https://go.microsoft.com/fwlink/?linkid=843447 (tar.gz)
+
 (Instructions)
 https://www.microsoft.com/net/core#linuxopensuse
 ________________________
