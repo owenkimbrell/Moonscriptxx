@@ -51,29 +51,53 @@ ________________________
 Next, make a folder in your home firectory
 --
   mkdir ~/gits
+  
 -- (Then clone this repository into the new folder)
+
   cd ~/gits
+  
   git clone https://github.com/owenkimbrell/Moonscriptxx
+  
 -- (Then cd into Moonscriptxx, and then into mnxx)
+
   cd Moonscriptxx
+  
   cd mnxx
+  
 -- (Then clone luastatic, luarocks, and moonscript) | OR (Prefered : install luarocks)
+
   git clone https://github.com/luarocks/luarocks
+  
   git clone https://github.com/ers35/luastatic
+  
   git clone https://github.com/leafo/moonscript (Will have to download dependencies for moonscript, use luarock if unsure)
+  
 OR (Prefered Method - Through luarocks)
+
   sudo apt-get install luarocks | sudo dnf install luarocks
+  
   sudo luarocks install busted
+  
   sudo luarocks install luafilesystem
+  
   sudo luarocks install luastatic
+  
   sudo luarocks install moonscript
+  
 --(Then cd back into the Moonscriptxx folder, and move it into the installer)
+
   cd ..
+  
   mv mnxx installer
+  
 --(Then change permissions on installer(executable found inside folder not folder)
+
   cd installer
+  
   sudo chmod +x installer
+  
 --(Then install)
+
   ./installer
 
   
@@ -83,7 +107,8 @@ This has multiple options, but essentially is for finding all .moon files in a d
 
 Example( lets imagine a .moon file or mulitiple .moon files containing moonscript is in a directory, and i mean any directory.) -  [ someName.moon ]
 
-moonxx -c     <-- This will compile all .moon files into a executable, with no file extension. This is known as a binary. To run this binary
+moonxx -c 
+<-- This will compile all .moon files into a executable, with no file extension. This is known as a binary. To run this binary
 
 ./someName
 
