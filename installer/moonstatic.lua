@@ -19,5 +19,9 @@ for _index_0 = 1, #targetFiles do
   local filosss = targetFiles[_index_0]
   if string.find(filosss, ".lua") then
     os.execute("luastatic " .. filosss .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/lua")
+    os.execute("mkdir src && mv " .. filosss .. " src")
+  end
+  if string.find(filosss, ".lua.c") then
+    os.execute("mv " .. filosss .. " src")
   end
 end

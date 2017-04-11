@@ -4,6 +4,7 @@ targetFiles = {}
 local *
 libinstalldir = "/usr/local/lib/moonxxx"
 os.execute("sudo mkdir " .. libinstalldir)
+os.execute("sudo mkdir " .. libinstalldir .. "/mnxx")
 cmdnB = {
     config: (dirr) =>
         os.execute("cd " .. dirr .. " && sudo ./configure")
@@ -39,8 +40,8 @@ installerr = {
     extract: =>
         mods\getFilesInDir "."
         for tfil in *targetFiles
-            if tfil == "mnxx.tar.gz"
-                cmdnB\unZipInstall tfil, libinstalldir
+            if tfil == "mnxx"
+                os.execute("sudo cp -r mnxx /usr/local/lib/moonxxx") 
             elseif tfil == "moonxx"
                 cmdnB\copyMach tfil, "/usr/local/bin"
             elseif tfil == "moonstatic"
