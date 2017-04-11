@@ -2,7 +2,7 @@ Moonscript++ - Standalone executable compiler for Moonscript(By Leafo)
 Compiler uses Luastatic(By ers53)
 
 How to install || 
-Download .net core SDK/Runtime version 1.1.1
+Download .net core SDK/Runtime version 1.1.1 <- THIS IS NOT REQUIRED. MOONSTATIC IS UPDATED TO HANDLE WITH NO DOTNET SUPPORT. FUNCTIONALITY REMAINS THE SAME REGARDING AUTO DETECTION/COMPILING MOONSCRIPT. SEE BOTTOM.
 
 Ubuntu 16.10(SDK)
 https://go.microsoft.com/fwlink/?linkid=843460 (.deb) | Or sudo apt-get install dotnet-dev-1.0.1
@@ -117,3 +117,10 @@ This will also output someName.lua and someName.lua.c
 
 
 Alot more is comming. Please share, and spread the goodword of luastatic and moonscript, as well as moonscript++. Run moonxx -h for more options. Thanks. 
+
+
+For No .net core usage 
+
+cd into directory with moonscript files. run in terminal
+
+moonstatic
