@@ -1,41 +1,90 @@
-Moonscript++ | BETA STAGE. A little language that compiles to C, Binarys and or C#.
+Moonscript++ - Standalone executable compiler for Moonscript(By Leafo)
+Compiler uses Luastatic(By ers53)
 
-Welcome, Moonscript is the dominant language for the future of programming in my opinion. Sadly my program is so far written in C#(.netcore) which easily supports 99% of linux. If your distro isnt supported, simply download and make the Linux.x64 build from the website. 
+How to install
+Download .net core SDK/Runtime version 1.1.1
 
-STATUS :
-Installer and binaries for /usr/local/bin WRITTEN IN MOONSCRIPT AND COMPILED THEMSELVES INTO C BINARIES. BIG THANKS TO LUASTATIC AND MOONSCRIPT for making this possible.
+Ubuntu 16.10(SDK)
+https://go.microsoft.com/fwlink/?linkid=843460 (.deb) | Or sudo apt-get install dotnet-dev-1.0.1
+---
+https://go.microsoft.com/fwlink/?linkid=843446 (.tar.gz)
+____________________
 
-DOES It WORK DUDE? Yes. But its not 100% simple yet. for instance
+Ubuntu 16.04(SDK)
+https://go.microsoft.com/fwlink/?linkid=843456 (.deb) | Or sudo apt-get install dotnet-dev-1.0.1
+---
+https://go.microsoft.com/fwlink/?linkid=843462 (.tar.gz)
+____________________
 
-moonxx -c will compile all moonscript found in directory to a executable.
+Fedora 24(SDK)
+https://go.microsoft.com/fwlink/?linkid=843461 (.tar.gz)
+(Instructions)
+https://www.microsoft.com/net/core#linuxfedora
+____________________
+
+Debian 8(SDK)
+https://go.microsoft.com/fwlink/?linkid=843453 (.tar.gz)
+(Instructions)
+https://www.microsoft.com/net/core#linuxdebian
+____________________
+
+RHEL(SDK)
+https://go.microsoft.com/fwlink/?linkid=843459 (.tar.gz) | Or yum install rh-dotnetcore10
+_____________________
+
+openSUSE 42.1(SDK)
+https://go.microsoft.com/fwlink/?linkid=843451 (tar.gz)
+(Instructions)
+https://www.microsoft.com/net/core#linuxopensuse
+______________________
+
+openSUSE 13.2(SDK)
+https://go.microsoft.com/fwlink/?linkid=843447 (tar.gz)
+(Instructions)
+https://www.microsoft.com/net/core#linuxopensuse
+________________________
+
+Next, make a folder in your home firectory
+--
+  mkdir ~/gits
+-- (Then clone this repository into the new folder)
+  cd ~/gits
+  git clone https://github.com/owenkimbrell/Moonscriptxx
+-- (Then cd into Moonscriptxx, and then into mnxx)
+  cd Moonscriptxx
+  cd mnxx
+-- (Then clone luastatic, luarocks, and moonscript) | OR (Prefered : install luarocks)
+  git clone https://github.com/luarocks/luarocks
+  git clone https://github.com/ers35/luastatic
+  git clone https://github.com/leafo/moonscript (Will have to download dependencies for moonscript, use luarock if unsure)
+OR (Prefered Method - Through luarocks)
+  sudo apt-get install luarocks | sudo dnf install luarocks
+  sudo luarocks install busted
+  sudo luarocks install luafilesystem
+  sudo luarocks install luastatic
+  sudo luarocks install moonscript
+--(Then cd back into the Moonscriptxx folder, and move it into the installer)
+  cd ..
+  mv mnxx installer
+--(Then change permissions on installer(executable found inside folder not folder)
+  cd installer
+  sudo chmod +x installer
+--(Then install)
+  ./installer
+
+  
+How to use (After installation step)
+Now you may run moonxx(The executable that links moonstatic and moonstatic.dll together)
+This has multiple options, but essentially is for finding all .moon files in a directory, and compiling them to lua, and then c, and finally an executable. (Using moonc, and luastatic, respectivly).
+
+Example( lets imagine a .moon file or mulitiple .moon files containing moonscript is in a directory, and i mean any directory.) -  [ someName.moon ]
+
+moonxx -c     <-- This will compile all .moon files into a executable, with no file extension. This is known as a binary. To run this binary
+
+./someName
+
+Will run the program without needing moonc or lua or moon binaries. This application can be distrobuted to multiple platforms, without needing lua or moonscript installed.
+This will also output someName.lua and someName.lua.c
 
 
-HOW TO INSTALL AND USE
-
-git clone https://github.com/owenkimbrell/Moonscriptxx/edit/master/
-
-install .net core. Soon this will be unessecary but for now just pre-install it.
-
-install luarocks AND OR clone the repo into mnxx/ (name cloned repo 'luarocks')
-
-install luastatic AND OR clone the repo into mnxx/ (name cloned repo 'luastatic')
-
-install moonscript AND OR clone the repo into mnxx/ (name cloned repo 'moonscript')
-
-AFTER CLONING AND OR INSTALLING REPOS AND MOONSCRIPT++ copy the mnxx directory(containing chosen resources into the installer dir)
-
-after mnxx dir is inside installer dir
-
-cd into the installer directory
-./installer
-
-how to use. cd into a directory with a .moon or .lua file and
-moonxx
-
-then chose -b or -c (-b builds scripts to lua | -c builds and compiles moonscript and or lua into binary)
-
-moonxx
--h 
-will display other options. More to come. All binaries other than moonstatic.dll are written in moonscript and have the actual lua and lua.c outputs as well availible. 
-
-WHATS NEXT? Craziness. Alot is comming. Be warned. Moonscript++ will be shipping soon stable. Thanks.
+Alot more is comming. Please share, and spread the goodword of luastatic and moonscript, as well as moonscript++. Run moonxx -h for more options. Thanks. 
