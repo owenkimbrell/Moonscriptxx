@@ -18,7 +18,7 @@ getFilesInDir(".")
 for _index_0 = 1, #targetFiles do
   local filosss = targetFiles[_index_0]
   if string.find(filosss, ".lua") then
-    os.execute("luastatic " .. filosss .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/lua")
+    os.execute("luastatic " .. filosss .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src")
     os.execute("mkdir src && mv " .. filosss .. " src")
   end
   if string.find(filosss, ".lua.c") then
@@ -30,7 +30,7 @@ for _index_0 = 1, #targetFiles do
     for _index_1 = 1, #targetFiles do
       local filosr = targetFiles[_index_1]
       if string.find(filosr, ".lua") then
-        os.execute("luastatic " .. filosr .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/lua")
+        os.execute("luastatic " .. filosr .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src")
         os.execute("mkdir src && mv " .. filosr .. " src")
       end
       if string.find(filosr, ".lua.c") then

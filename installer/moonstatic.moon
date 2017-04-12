@@ -12,7 +12,7 @@ getFilesInDir = (dirr) ->
 getFilesInDir "."
 for filosss in *targetFiles
     if string.find(filosss,".lua")
-        os.execute("luastatic " .. filosss .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/lua") 
+        os.execute("luastatic " .. filosss .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src") 
         os.execute("mkdir src && mv " .. filosss .. " src")
     if string.find(filosss,".lua.c")
         os.execute("mv " .. filosss .. " src")
@@ -21,7 +21,7 @@ for filosss in *targetFiles
         getFilesInDir "."
         for filosr in *targetFiles
             if string.find(filosr,".lua")
-                os.execute("luastatic " .. filosr .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/lua")
+                os.execute("luastatic " .. filosr .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src")
                 os.execute("mkdir src && mv " .. filosr .. " src")
             if string.find(filosr,".lua.c")
                 os.execute("mv " .. filosss .. " src")
