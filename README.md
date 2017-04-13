@@ -1,126 +1,71 @@
-Moonscript++ - Standalone executable compiler for Moonscript(By Leafo)
-Compiler uses Luastatic(By ers53)
-
-How to install || 
-Download .net core SDK/Runtime version 1.1.1 <- THIS IS NOT REQUIRED. MOONSTATIC IS UPDATED TO HANDLE WITH NO DOTNET SUPPORT. FUNCTIONALITY REMAINS THE SAME REGARDING AUTO DETECTION/COMPILING MOONSCRIPT. SEE BOTTOM.
-
-Ubuntu 16.10(SDK)
-https://go.microsoft.com/fwlink/?linkid=843460 (.deb) | Or sudo apt-get install dotnet-dev-1.0.1
----
-https://go.microsoft.com/fwlink/?linkid=843446 (.tar.gz)
-____________________
-
-Ubuntu 16.04(SDK)
-https://go.microsoft.com/fwlink/?linkid=843456 (.deb) | Or sudo apt-get install dotnet-dev-1.0.1
----
-https://go.microsoft.com/fwlink/?linkid=843462 (.tar.gz)
-____________________
-
-Fedora 24(SDK)
-https://go.microsoft.com/fwlink/?linkid=843461 (.tar.gz)
-
-(Instructions)
-https://www.microsoft.com/net/core#linuxfedora
-____________________
-
-Debian 8(SDK)
-https://go.microsoft.com/fwlink/?linkid=843453 (.tar.gz)
-
-(Instructions)
-https://www.microsoft.com/net/core#linuxdebian
-____________________
-
-RHEL(SDK)
-https://go.microsoft.com/fwlink/?linkid=843459 (.tar.gz) | Or yum install rh-dotnetcore10
-_____________________
-
-openSUSE 42.1(SDK)
-https://go.microsoft.com/fwlink/?linkid=843451 (tar.gz)
-
-(Instructions)
-https://www.microsoft.com/net/core#linuxopensuse
-______________________
-
-openSUSE 13.2(SDK)
-https://go.microsoft.com/fwlink/?linkid=843447 (tar.gz)
-
-(Instructions)
-https://www.microsoft.com/net/core#linuxopensuse
-________________________
-
-Next, make a folder in your home firectory
---
-  mkdir ~/gits
+_**Moonscript++**_ >||< **Lynxish Assembler**
+--------------------
+  **Version 1.0.4**
   
--- (Then clone this repository into the new folder)
+**____________________**
 
-  cd ~/gits
-  
-  git clone https://github.com/owenkimbrell/Moonscriptxx
-  
--- (Then cd into Moonscriptxx, and then into mnxx)
+_Changes_
+* Removed all .netcore dependencies.
+* Updated system, relies on itself.
+* Easier to use
+-----------------------------
+_Whats New_
+* Single binary, currently compiled for x64_86 PC's
+* Simple to compile yourself, in a single step. Explained in section _Compiling_
+* More stable, and functional. **Now when autodetecting moonscript in directory, it will automatically include all .lua files not specified as the main file. Also, if no main file is specified, all files will be compiled, excluding themselves as modules _but_ including all other .lua files in directory as modules**
+* Has a cleaner function, _for usage see **How to use**_. This basically cleans up and formats your directory for development/release
+______________________________________________-
 
-  cd Moonscriptxx
-  
-  cd mnxx
-  
--- (Then clone luastatic, luarocks, and moonscript) | OR (Prefered : install luarocks)
+_Installing_ | **Installer comming within next couple days**
 
-  git clone https://github.com/luarocks/luarocks
-  
-  git clone https://github.com/ers35/luastatic
-  
-  git clone https://github.com/leafo/moonscript (Will have to download dependencies for moonscript, use luarock if unsure)
-  
-OR (Prefered Method - Through luarocks)
+`mkdir ~/moonplusplus`
 
-  sudo apt-get install luarocks | sudo dnf install luarocks
-  
-  sudo luarocks install busted
-  
-  sudo luarocks install luafilesystem
-  
-  sudo luarocks install luastatic
-  
-  sudo luarocks install moonscript
-  
---(Then cd back into the Moonscriptxx folder, and move it into the installer)
+`cd ~/moonplusplus`
 
-  cd ..
-  
-  mv mnxx installer
-  
---(Then change permissions on installer(executable found inside folder not folder)
+`git clone https://github.com/owenkimbrell/Moonscriptxx`
 
-  cd installer
-  
-  sudo chmod +x installer
-  
---(Then install)
+`cd Moonscriptxx`
 
-  ./installer
+`cd mnxx`
 
-  
-How to use (After installation step)
-Now you may run moonxx(The executable that links moonstatic and moonstatic.dll together)
-This has multiple options, but essentially is for finding all .moon files in a directory, and compiling them to lua, and then c, and finally an executable. (Using moonc, and luastatic, respectivly).
+`cd ll_53_standard`
 
-Example( lets imagine a .moon file or mulitiple .moon files containing moonscript is in a directory, and i mean any directory.) -  [ someName.moon ]
+`cd src`
 
-moonxx -c 
-<-- This will compile all .moon files into a executable, with no file extension. This is known as a binary. To run this binary
+`make && cd ~/moonplusplus/Moonscriptxx`
 
-./someName
+`mkdir /usr/local/lib/moonxxx && cp mnxx /usr/local/lib/moonxxx`
 
-Will run the program without needing moonc or lua or moon binaries. This application can be distrobuted to multiple platforms, without needing lua or moonscript installed.
-This will also output someName.lua and someName.lua.c
+`cd moonscriptxx/Release`
+
+NOW, if you have a intel/amd supporting amd64 architecture(_most people_) you can simply
+
+`cp moonxx /usr/local/bin && cp ansicolors.lua /usr/local/bin && chmod +x /usr/local/bin/moonxx`
+
+_Compiling_
+
+IF YOU WANT TO COMPILE IT YOURSELF, first do all the above steps execept the copying into your /usr/local/bin
+
+`moon moonxx.moon`
+
+_This will run the same program in moonscript instead of a binary, which will compile itself, and link it to ansicolors.lua_
+**It also will replace the default moonxx binary, then follow the same steps for copying and allowing execution privilage**
+
+`cp moonxx /usr/local/bin && cp ansicolors.lua /usr/local/bin && chmod +x /usr/local/bin/moonxx`
 
 
-Alot more is comming. Please share, and spread the goodword of luastatic and moonscript, as well as moonscript++. Run moonxx -h for more options. Thanks. 
+**How to use**
+
+* `moonxx`    | Running this in a terminal will compile all .moon files in directory, on each compiliation it will link it with all .lua or .moon files found in directory EXECPT itself.
+
+* `moonxx clean remove`    | Will delete noise files generated on compiliation
+
+* `moonxx clean move`      | Will make a src directory and copy the output .lua and .lua.c files into the src directory
 
 
-For No .net core usage 
+**Notes**
+1. If using modules, its ok to delete the .lua.c. As well as the .lua of the **main** targeted executable. However, the .lua file of the referenced module needs to remain in the structure its required in the .moon file.
+2. Structure as of now, is the same as .moon. ALL FUNCTIONS WORK. In fact, no errors come of coding unless you coded it wrong. No special format is required. Simply run moonxx in the directory
 
-cd into directory with moonscript files. run in terminal
-
-moonstatic
+Big thanks to luastatic(ers35) and Moonscript(Leafo)
+Happy coding. Many more features on the way within days. Spread the word, _**maybe click on the star and watch buttons in the top right corner.**_ _Thanks_
