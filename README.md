@@ -14,6 +14,7 @@ _Whats New_
 * Simple to compile yourself, in a single step. Explained in section _Compiling_
 * More stable, and functional. **Now when autodetecting moonscript in directory, it will automatically include all .lua files not specified as the main file. Also, if no main file is specified, all files will be compiled, excluding themselves as modules _but_ including all other .lua files in directory as modules**
 * Has a cleaner function, _for usage see **How to use**_. This basically cleans up and formats your directory for development/release
+
 ______________________________________________-
 
 
