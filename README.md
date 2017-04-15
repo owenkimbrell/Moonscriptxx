@@ -1,7 +1,7 @@
 _**Moonscript++**_ >||< **Lynxish Assembler**
 --------------------
   **Version 1.0.4**
-  
+  **Compiles Moonscript into binary executables, to distrobute to large groups of machines. Increases security, performance, and compatibility.**
 **____________________**
 
 _Changes_
