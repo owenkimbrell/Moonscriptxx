@@ -1,4 +1,4 @@
-local JustCompd, TargetFiles, KeepModules, CmdnB, Mods, Search, DoCompile, CompGcc, CompClang, MoonFunction, Cleaner, CheckArgs, ParseArgs
+local JustCompd, TargetFiles, KeepModules, CmdnB, Mods, Search, DoCompile, CompGcc, CompClang, MoonFunction, Cleaner, CheckArgs
 JustCompd = ""
 TargetFiles = { }
 KeepModules = { }
@@ -464,46 +464,4 @@ CheckArgs = function()
     end
   end
 end
-ParseArgs = {
-  CheckMode = function(self)
-    if MainFil ~= nil then
-      return true
-    elseif Mode ~= "compile" then
-      return true
-    end
-  end,
-  CheckTarget = function(self)
-    if self:CheckMode() == true then
-      if Target == "all" then
-        if Dir == "current" then
-          if Compilly == "clang" then
-            return CompClang:CompileCrntDir(MainFil, Cargss)
-          elseif Compilly == "gcc" then
-            return CompGcc:CompileCrntDir(MainFil, Cargss)
-          end
-        elseif Dir ~= "current" then
-          if Compilly == "clang" then
-            return CompClang:CompileDir(Dir, MainFil, Cargss)
-          elseif Compilly == "gcc" then
-            return CompGcc:CompileDir(Dir, MainFil, Cargss)
-          end
-        end
-      elseif Target ~= "all" then
-        if Dir == "current" then
-          if Compilly == "clang" then
-            return Mods:CompileLua("CC=clang", MainFil, nil, Cargss)
-          elseif Compilly == "gcc" then
-            return Mods:CompileLua("CC=gcc", MainFil, nil, Cargss)
-          end
-        elseif Dir ~= "current" then
-          if Compilly == "clang" then
-            return Mods:CompileLua("CC=clang", MainFil, nil, Cargss)
-          elseif Compilly == "gcc" then
-            return Mods:CompileLua("CC=gcc", MainFil, nil, Cargss)
-          end
-        end
-      end
-    end
-  end
-}
 return CheckArgs()

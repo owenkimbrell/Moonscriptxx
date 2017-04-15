@@ -379,36 +379,5 @@ __________________________________________________________________________
                 doAllEm = Search\ForExt ".",".lua"
                 for lfilz in *doAllEm
                     CompGcc\CompileDir(".",lfilz,"") 
-ParseArgs = {
-    CheckMode: =>
-        if MainFil != nil
-            return true
-        elseif Mode != "compile"
-            return true
-    CheckTarget: =>
-        if @CheckMode! == true
-            if Target == "all"
-                if Dir == "current"
-                    if Compilly == "clang"
-                        CompClang\CompileCrntDir(MainFil,Cargss)
-                    elseif Compilly == "gcc"
-                        CompGcc\CompileCrntDir(MainFil,Cargss)
-                elseif Dir != "current"
-                    if Compilly == "clang"
-                        CompClang\CompileDir(Dir,MainFil,Cargss)
-                    elseif Compilly == "gcc"
-                        CompGcc\CompileDir(Dir,MainFil,Cargss)
-            elseif Target != "all"
-                if Dir == "current"
-                    if Compilly == "clang"
-                        Mods\CompileLua("CC=clang",MainFil,nil,Cargss)
-                    elseif Compilly == "gcc"
-                        Mods\CompileLua("CC=gcc",MainFil,nil,Cargss)
-                elseif Dir != "current"
-                    if Compilly == "clang"
-                        Mods\CompileLua("CC=clang",MainFil,nil,Cargss)
-                    elseif Compilly == "gcc"
-                        Mods\CompileLua("CC=gcc",MainFil,nil,Cargss)
-}
+
 CheckArgs!
---ParseArgs\CheckTarget!
