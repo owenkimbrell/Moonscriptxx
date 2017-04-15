@@ -4,6 +4,16 @@ TargetFiles = {}
 KeepModules = {}
 colors = require "ansicolors"
 CmdnB = {
+    CheckExt: (str) =>
+        isItMoon = string.match(str,".moon")
+        indx,indxe = string.find(str,".moon")
+        if isItMoon != nil
+            strsub = string.sub(str,indx,indxe)
+            justNam = string.sub(str,0,indx)
+            os.execute("moonc " .. str)
+            return justNam .. "lua"
+        elseif isItMoon == nil
+            return str
     Config: (dirr) =>
         os.execute("cd " .. dirr .. " && sudo ./configure")
     AskSudo: (str) =>
@@ -34,6 +44,7 @@ Mods = {
             count = count + 1
     -- Args : compilr: Which compiler to use | filosi: file | requirez: what modueles to require | compargs: Args to send to compiler
     CompileLua: (compilr="CC=gcc",filosi,requirez,compargs) =>
+        filosi = CmdnB\CheckExt(filosi) 
         noMods = true
         secspace = " "
         includes = ""

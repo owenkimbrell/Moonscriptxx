@@ -4,6 +4,18 @@ TargetFiles = { }
 KeepModules = { }
 local colors = require("ansicolors")
 CmdnB = {
+  CheckExt = function(self, str)
+    local isItMoon = string.match(str, ".moon")
+    local indx, indxe = string.find(str, ".moon")
+    if isItMoon ~= nil then
+      local strsub = string.sub(str, indx, indxe)
+      local justNam = string.sub(str, 0, indx)
+      os.execute("moonc " .. str)
+      return justNam .. "lua"
+    elseif isItMoon == nil then
+      return str
+    end
+  end,
   Config = function(self, dirr)
     return os.execute("cd " .. dirr .. " && sudo ./configure")
   end,
@@ -49,6 +61,7 @@ Mods = {
     if compilr == nil then
       compilr = "CC=gcc"
     end
+    filosi = CmdnB:CheckExt(filosi)
     local noMods = true
     local secspace = " "
     local includes = ""
