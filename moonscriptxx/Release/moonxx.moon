@@ -43,12 +43,16 @@ Mods = {
             TargetFiles[count] = namo
             count = count + 1
     -- Args : compilr: Which compiler to use | filosi: file | requirez: what modueles to require | compargs: Args to send to compiler
-    CompileLua: (compilr="CC=gcc",filosi,requirez,compargs) =>
+    CompileLua: (compilr="gcc",filosi,requirez,compargs) =>
+        if compargs == nil
+            compargs = ""
         filosi = CmdnB\CheckExt(filosi) 
         noMods = true
         secspace = " "
         includes = ""
         if compilr == ""
+            compilr = "gcc"
+        elseif compilr == nil
             compilr = "gcc"
         if requirez != nil
             noMods = false
@@ -66,19 +70,23 @@ Mods = {
                     print(colors("%{yellow}Compiling with: " .. filll .. " as a module"))
             elseif noMods == true
                 print(colors("%{yellow bright}Compiling with no modules%{reset} " .. filosi))
+                print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
                 os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a -I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src " .. compargs)
             if noMods == false
+                print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
                 os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " " .. includes .. secspace .. "/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src " .. compargs)
             JustCompd = filosi
-        elseif compargs == ""
+        if compargs == ""
             print(colors("%{magenta bright}Main program entry file: " .. filosi))
             if noMods == false
                 for filll in *requirez 
                     print(colors("%{yellow}Compiling with: " .. filll .. " as a module"))
             elseif noMods == true
                 print(colors("%{yellow bright}Compiling with no modules%{reset} " .. filosi))
+                print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
                 os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a -I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src")
             if noMods == false
+                print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
                 os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " " .. includes .. secspace .. "/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src")
             JustCompd = filosi
     BuildAllMoon: (filosi) =>
@@ -204,6 +212,7 @@ agfour = arg[4]
 agfive = arg[5]
 agsix = arg[6]
 CheckArgs = ->
+    NotAgain = false
     cleanMode = false 
     if agone == "help"
         print(colors("%{red bright}moonxx%{reset} %{blue bright}leave-blank%{reset} | %{yellow bright}clean%{reset} | %{cyan bright}compile%{reset}
@@ -212,9 +221,15 @@ CheckArgs = ->
 %{cyan}Note:%{reset} if you run moonxx and leave arguments blank and Moonscript++ will make value default, which will be listed below.
 
 --
-%{blue bright}If left blank (ex.%{reset} %{red bright}moonxx%{reset}%{blue bright} ) Moonscript++ will compile all%{reset} %{yellow bright}.moon%{reset} %{blue bright}and%{reset} %{yellow bright}.lua%{reset} %{blue bright}files found in directory, and each%{reset} %{yellow bright}.lua / .moon%{reset} %{blue bright}file will be
-dynamically included in the currently being compiled moonscript(or lua) file.
+%{blue bright}If left blank (ex.%{reset} %{red bright}moonxx%{reset}%{blue bright} ) Moonscript++ will build all%{reset} %{yellow bright}.moon%{reset} %{blue bright}files found in directory(Not compile)
 __________________________________________________________________________
+
+%{red bright}moonxx compile%{reset} %{yellow bright}will automatically build/compile all .moon,.lua in current directory and automatically link all
+.moon and .lua files as modules, excluding itself.%{reset}
+__________________________________________________________________________
+
+%{red bright}moonxx compile FileName all%{reset} %{yellow bright} will compile a single targeted file, with all .lua or .moon files
+in directory automatically linked as modules.
 
 %{yellow bright}clean | Options: %{reset}%{green bright}remove%{reset}%{yellow bright} / %{reset}%{magenta bright} move%{reset}
 %{green bright} remove : will delete all noise (.lua.c) files. These can be regenerated, so dont worry.%{reset}
@@ -245,52 +260,125 @@ __________________________________________________________________________
                 cleanMode = true
                 Cleaner\DirectoryOutputs(".",false,nil)
     elseif agone == nil
-        sendTab = {}
+        NotAgain = true
         buildAllEm = Search\ForExt ".", ".moon"
         for filz in *buildAllEm
             os.execute("moonc " .. filz)
-        doAllEm = Search\ForExt ".",".lua"
-        for lfil in *doAllEm
-            DoCompile\CompileWholeDir(".",lfil,"gcc","")
+            print(colors("%{magenta bright}Run [moonxx compile] to compile  :%{reset} %{red bright}" .. filz .. "%{reset}  %{magenta bright}:%{reset} %{yellow bright} or run moonxx help"))
     elseif agone == "compile"
         Mode = "compile"
     if agtwo != nil
         if cleanMode == false
             MainFil = agtwo
-            if agthree != nil
+            if agthree == "all"
                 Target = agthree
-                if agfour == "current"
+                if agfour == nil
                     Dir = "current"
-                    if agfive == "none"
-                        Cargss = "none"
-                    elseif agfive != "none"
-                        Cargss = agfive
-                elseif agfour != "current"
-                    Dir = agfour
-                    if agfive == "none"
-                        Cargss = "none"
-                        if agsix != nil
-                            Compilly = agsix
-                            ParseArgs\CheckTarget!
-                        elseif agsix == nil
-                            Compilly = "gcc"
-                            ParseArgs\CheckTarget!
-                    elseif agfive != "none"
-                        Cargss = agfive
-                        if agsix != nil
-                            Compilly = agsix
-                            ParseArgs\CheckTarget!
-                    elseif agfive == nil
+                    if agfive == nil
                         Cargss = ""
                         Compilly = "gcc"
-                        ParseArgs\CheckTarget!
+                    elseif agfive != nil
+                        if agfive != "none"
+                            Cargss = agfive
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly == "gcc"
+                    elseif agfive == "none"
+                        Cargss = ""
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly = "gcc"
+                    sendTabla = Search\ForExt ".",".lua"
+                    --TODO:Fix this to exlude itself while compiling
+                    --MainFilEx = CmdnB\CheckExt(MainFil)
+                    --sendTabla[MainFilEx] = ""
+                    Mods\CompileLua(Compilly,MainFil,sendTabla,Cargss)
+                elseif agfour == "current"
+                    Dir = "current"
+                    if agfive == "none"
+                        Cargss = ""
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly == "gcc"
+                    elseif agfive != nil
+                        Cargss = agfive
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly = "gcc"
+                    elseif agfive == nil
+                        Cargss = ""
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly = "gcc"
+                    sendTabla = Search\ForExt ".",".lua"
+                    --TODO:Fix this to exlude itself while compiling
+                    --MainFilEx = CmdnB\CheckExt(MainFil)
+                    --sendTabla[MainFilEx] = ""
+                    Mods\CompileLua(Compilly,MainFil,sendTabla,Cargss)
+                elseif agfour != "current"
+                    Dir = agfour
+                    sentTabla = Search\ForExt Dir, ".lua"
+                    if agfive == "none"
+                        Cargss = ""
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly == "gcc"
+                    elseif agfive != nil
+                        Cargss = agfive
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly = "gcc"
+                    elseif agfive == nil
+                        Cargss = ""
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly = "gcc"
+                    --TODO:Fix this to exlude itself while compiling
+                    --MainFilEx = CmdnB\CheckExt(MainFil)
+                    --sendTabla[MainFilEx] = ""
+                    Mods\CompileLua(Compilly,MainFil,sentTabla,Cargss)
+            elseif agthree != nil
+                if MainFil != nil
+                    sendFilo = {}
+                    sendFilo[1] = agthree
+                    if agfour != nil
+                        Dir = agfour
+                        if agfive != nil
+                            if agfive != "none"
+                                Cargss = agfive
+                            elseif agfive == "none"
+                                Cargss = ""
+                        elseif agfive == nil
+                            Cargss = ""
+                            Compilly = "gcc"
+                        if agsix != nil
+                            Compilly = agsix
+                        elseif agsix == nil
+                            Compilly == "gcc"
+                        Mods\CompileLua(Compilly,MainFil,sendFilo,Cargss)
+                    elseif agfour == nil
+                        Mods\CompileLua("gcc",MainFil,sendFilo,"")
             elseif agthree == nil
                 if MainFil != nil
                     Mods\CompileLua("gcc",MainFil,nil,"")
     elseif agtwo == nil
         if cleanMode == false
-            if MainFil != nil
-                Mods\CompileLua("gcc",MainFil,nil,"")
+            if NotAgain == false
+                sendTab = {}
+                buildAllEm = Search\ForExt ".", ".moon"
+                for filz in *buildAllEm
+                    os.execute("moonc " .. filz)
+                doAllEm = Search\ForExt ".",".lua"
+                for lfilz in *doAllEm
+                    CompGcc\CompileDir(".",lfilz,"") 
 ParseArgs = {
     CheckMode: =>
         if MainFil != nil
@@ -323,4 +411,4 @@ ParseArgs = {
                         Mods\CompileLua("CC=gcc",MainFil,nil,Cargss)
 }
 CheckArgs!
-ParseArgs\CheckTarget!
+--ParseArgs\CheckTarget!

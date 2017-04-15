@@ -59,13 +59,18 @@ Mods = {
   end,
   CompileLua = function(self, compilr, filosi, requirez, compargs)
     if compilr == nil then
-      compilr = "CC=gcc"
+      compilr = "gcc"
+    end
+    if compargs == nil then
+      compargs = ""
     end
     filosi = CmdnB:CheckExt(filosi)
     local noMods = true
     local secspace = " "
     local includes = ""
     if compilr == "" then
+      compilr = "gcc"
+    elseif compilr == nil then
       compilr = "gcc"
     end
     if requirez ~= nil then
@@ -91,13 +96,16 @@ Mods = {
         end
       elseif noMods == true then
         print(colors("%{yellow bright}Compiling with no modules%{reset} " .. filosi))
+        print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
         os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a -I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src " .. compargs)
       end
       if noMods == false then
+        print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
         os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " " .. includes .. secspace .. "/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src " .. compargs)
       end
       JustCompd = filosi
-    elseif compargs == "" then
+    end
+    if compargs == "" then
       print(colors("%{magenta bright}Main program entry file: " .. filosi))
       if noMods == false then
         for _index_0 = 1, #requirez do
@@ -106,9 +114,11 @@ Mods = {
         end
       elseif noMods == true then
         print(colors("%{yellow bright}Compiling with no modules%{reset} " .. filosi))
+        print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
         os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " /usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a -I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src")
       end
       if noMods == false then
+        print(colors("%{red bright}Using C-compiler:%{reset} %{cyan}" .. compilr))
         os.execute("CC=" .. compilr .. " luastatic " .. filosi .. " " .. includes .. secspace .. "/usr/local/lib/moonxxx/mnxx/ll_53_standard/src/liblua.a " .. "-I/usr/local/lib/moonxxx/mnxx/ll_53_standard/src")
       end
       JustCompd = filosi
@@ -284,9 +294,10 @@ local agfour = arg[4]
 local agfive = arg[5]
 local agsix = arg[6]
 CheckArgs = function()
+  local NotAgain = false
   local cleanMode = false
   if agone == "help" then
-    print(colors("%{red bright}moonxx%{reset} %{blue bright}leave-blank%{reset} | %{yellow bright}clean%{reset} | %{cyan bright}compile%{reset}\n\n\n%{cyan}Note:%{reset} if you run moonxx and leave arguments blank and Moonscript++ will make value default, which will be listed below.\n\n--\n%{blue bright}If left blank (ex.%{reset} %{red bright}moonxx%{reset}%{blue bright} ) Moonscript++ will compile all%{reset} %{yellow bright}.moon%{reset} %{blue bright}and%{reset} %{yellow bright}.lua%{reset} %{blue bright}files found in directory, and each%{reset} %{yellow bright}.lua / .moon%{reset} %{blue bright}file will be\ndynamically included in the currently being compiled moonscript(or lua) file.\n__________________________________________________________________________\n\n%{yellow bright}clean | Options: %{reset}%{green bright}remove%{reset}%{yellow bright} / %{reset}%{magenta bright} move%{reset}\n%{green bright} remove : will delete all noise (.lua.c) files. These can be regenerated, so dont worry.%{reset}\n%{magenta bright} move : creates a src directory and copies .lua.c and .lua files into the directory%{reset}\n%{yellow bright}ex.%{reset} %{red bright} moonxx clean remove%{reset}\n__________________________________________________________________________\n\n%{cyan bright} compile | Options: %{reset}%{red bright}File name%{reset}    | %{cyan bright}This will compile a single file with no modules%{reset}\n%{cyan bright}ex.%{reset} %{red bright} moonxx compile myFile.moon%{reset}\n"))
+    print(colors("%{red bright}moonxx%{reset} %{blue bright}leave-blank%{reset} | %{yellow bright}clean%{reset} | %{cyan bright}compile%{reset}\n\n\n%{cyan}Note:%{reset} if you run moonxx and leave arguments blank and Moonscript++ will make value default, which will be listed below.\n\n--\n%{blue bright}If left blank (ex.%{reset} %{red bright}moonxx%{reset}%{blue bright} ) Moonscript++ will build all%{reset} %{yellow bright}.moon%{reset} %{blue bright}files found in directory(Not compile)\n__________________________________________________________________________\n\n%{red bright}moonxx compile%{reset} %{yellow bright}will automatically build/compile all .moon,.lua in current directory and automatically link all\n.moon and .lua files as modules, excluding itself.%{reset}\n__________________________________________________________________________\n\n%{red bright}moonxx compile FileName all%{reset} %{yellow bright} will compile a single targeted file, with all .lua or .moon files\nin directory automatically linked as modules.\n\n%{yellow bright}clean | Options: %{reset}%{green bright}remove%{reset}%{yellow bright} / %{reset}%{magenta bright} move%{reset}\n%{green bright} remove : will delete all noise (.lua.c) files. These can be regenerated, so dont worry.%{reset}\n%{magenta bright} move : creates a src directory and copies .lua.c and .lua files into the directory%{reset}\n%{yellow bright}ex.%{reset} %{red bright} moonxx clean remove%{reset}\n__________________________________________________________________________\n\n%{cyan bright} compile | Options: %{reset}%{red bright}File name%{reset}    | %{cyan bright}This will compile a single file with no modules%{reset}\n%{cyan bright}ex.%{reset} %{red bright} moonxx compile myFile.moon%{reset}\n"))
   elseif agone == "clean" then
     if agtwo ~= nil then
       if agtwo == "remove" then
@@ -311,16 +322,12 @@ CheckArgs = function()
       end
     end
   elseif agone == nil then
-    local sendTab = { }
+    NotAgain = true
     local buildAllEm = Search:ForExt(".", ".moon")
     for _index_0 = 1, #buildAllEm do
       local filz = buildAllEm[_index_0]
       os.execute("moonc " .. filz)
-    end
-    local doAllEm = Search:ForExt(".", ".lua")
-    for _index_0 = 1, #doAllEm do
-      local lfil = doAllEm[_index_0]
-      DoCompile:CompileWholeDir(".", lfil, "gcc", "")
+      print(colors("%{magenta bright}Run [moonxx compile] to compile  :%{reset} %{red bright}" .. filz .. "%{reset}  %{magenta bright}:%{reset} %{yellow bright} or run moonxx help"))
     end
   elseif agone == "compile" then
     local Mode = "compile"
@@ -328,36 +335,109 @@ CheckArgs = function()
   if agtwo ~= nil then
     if cleanMode == false then
       local MainFil = agtwo
-      if agthree ~= nil then
+      if agthree == "all" then
         local Target = agthree
-        if agfour == "current" then
+        if agfour == nil then
           local Dir = "current"
-          if agfive == "none" then
-            local Cargss = "none"
-          elseif agfive ~= "none" then
-            local Cargss = agfive
-          end
-        elseif agfour ~= "current" then
-          local Dir = agfour
-          if agfive == "none" then
-            local Cargss = "none"
+          if agfive == nil then
+            local Cargss = ""
+            local Compilly = "gcc"
+          elseif agfive ~= nil then
+            if agfive ~= "none" then
+              local Cargss = agfive
+            end
             if agsix ~= nil then
               local Compilly = agsix
-              return ParseArgs:CheckTarget()
+            elseif agsix == nil then
+              local _ = Compilly == "gcc"
+            end
+          elseif agfive == "none" then
+            local Cargss = ""
+            if agsix ~= nil then
+              local Compilly = agsix
             elseif agsix == nil then
               local Compilly = "gcc"
-              return ParseArgs:CheckTarget()
             end
-          elseif agfive ~= "none" then
+          end
+          local sendTabla = Search:ForExt(".", ".lua")
+          return Mods:CompileLua(Compilly, MainFil, sendTabla, Cargss)
+        elseif agfour == "current" then
+          local Dir = "current"
+          if agfive == "none" then
+            local Cargss = ""
+            if agsix ~= nil then
+              local Compilly = agsix
+            elseif agsix == nil then
+              local _ = Compilly == "gcc"
+            end
+          elseif agfive ~= nil then
             local Cargss = agfive
             if agsix ~= nil then
               local Compilly = agsix
-              return ParseArgs:CheckTarget()
+            elseif agsix == nil then
+              local Compilly = "gcc"
             end
           elseif agfive == nil then
             local Cargss = ""
-            local Compilly = "gcc"
-            return ParseArgs:CheckTarget()
+            if agsix ~= nil then
+              local Compilly = agsix
+            elseif agsix == nil then
+              local Compilly = "gcc"
+            end
+          end
+          local sendTabla = Search:ForExt(".", ".lua")
+          return Mods:CompileLua(Compilly, MainFil, sendTabla, Cargss)
+        elseif agfour ~= "current" then
+          local Dir = agfour
+          local sentTabla = Search:ForExt(Dir, ".lua")
+          if agfive == "none" then
+            local Cargss = ""
+            if agsix ~= nil then
+              local Compilly = agsix
+            elseif agsix == nil then
+              local _ = Compilly == "gcc"
+            end
+          elseif agfive ~= nil then
+            local Cargss = agfive
+            if agsix ~= nil then
+              local Compilly = agsix
+            elseif agsix == nil then
+              local Compilly = "gcc"
+            end
+          elseif agfive == nil then
+            local Cargss = ""
+            if agsix ~= nil then
+              local Compilly = agsix
+            elseif agsix == nil then
+              local Compilly = "gcc"
+            end
+          end
+          return Mods:CompileLua(Compilly, MainFil, sentTabla, Cargss)
+        end
+      elseif agthree ~= nil then
+        if MainFil ~= nil then
+          local sendFilo = { }
+          sendFilo[1] = agthree
+          if agfour ~= nil then
+            local Dir = agfour
+            if agfive ~= nil then
+              if agfive ~= "none" then
+                local Cargss = agfive
+              elseif agfive == "none" then
+                local Cargss = ""
+              end
+            elseif agfive == nil then
+              local Cargss = ""
+              local Compilly = "gcc"
+            end
+            if agsix ~= nil then
+              local Compilly = agsix
+            elseif agsix == nil then
+              local _ = Compilly == "gcc"
+            end
+            return Mods:CompileLua(Compilly, MainFil, sendFilo, Cargss)
+          elseif agfour == nil then
+            return Mods:CompileLua("gcc", MainFil, sendFilo, "")
           end
         end
       elseif agthree == nil then
@@ -368,8 +448,18 @@ CheckArgs = function()
     end
   elseif agtwo == nil then
     if cleanMode == false then
-      if MainFil ~= nil then
-        return Mods:CompileLua("gcc", MainFil, nil, "")
+      if NotAgain == false then
+        local sendTab = { }
+        local buildAllEm = Search:ForExt(".", ".moon")
+        for _index_0 = 1, #buildAllEm do
+          local filz = buildAllEm[_index_0]
+          os.execute("moonc " .. filz)
+        end
+        local doAllEm = Search:ForExt(".", ".lua")
+        for _index_0 = 1, #doAllEm do
+          local lfilz = doAllEm[_index_0]
+          CompGcc:CompileDir(".", lfilz, "")
+        end
       end
     end
   end
@@ -416,5 +506,4 @@ ParseArgs = {
     end
   end
 }
-CheckArgs()
-return ParseArgs:CheckTarget()
+return CheckArgs()
