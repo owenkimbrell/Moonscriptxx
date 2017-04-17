@@ -5,6 +5,10 @@ _**Moonscript++**_ >||< **Lynxish Assembler**
   
 **____________________**
 
+### Wiki : https://github.com/owenkimbrell/Moonscriptxx/wiki ###
+
+**___________________________________________**
+
 _Changes_
 * Removed all .netcore dependencies.
 * Updated system, relies on itself.
