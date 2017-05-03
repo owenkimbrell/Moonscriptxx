@@ -1,0 +1,28 @@
+return {
+  _all = {
+    ['ROOT'] = {'tests'},
+  },
+  default = {
+    ['ROOT'] = {'specs'},
+    ['tags'] = {'tag11','tag22','tag33'},
+    ['exclude-tags'] = {'etag11','etag22','etag33'},
+    ['pattern'] = '_spec%.lua$',
+    ['exclude-pattern'] = '_exclude',
+    ['filter'] = 'filt',
+    ['filter-out'] = 'filt-out',
+    ['loaders'] = 'terra,moonscript',
+    ['Xoutput'] = '-f,--flag',
+    ['Xhelper'] = '-v,--verbose',
+  },
+  test = {
+    ['tags'] = 'test1,test2,test3',
+    ['exclude-tags'] = 'etest1,etest2,etest3',
+    ['pattern'] = {'_test1%.lua$', '_test2%.lua$'},
+    ['exclude-pattern'] = {'_exclude1', '_exclude2'},
+    ['filter'] = {'filt1', 'filt2'},
+    ['filter-out'] = {'filt1-out', 'filt2-out'},
+    ['loaders'] = {'lua','terra'},
+    ['Xoutput'] = {'-s','--sound'},
+    ['Xhelper'] = {'-t','--print'},
+  }
+}
