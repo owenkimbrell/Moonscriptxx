@@ -4,7 +4,7 @@ _**Moonscript++**_ >||< **Lynxish Assembler**
   **Compiles Moonscript into binary executables, to distrobute to large groups of machines. Increases security, performance, and compatibility.**
 **___________________**
 
-##Major update comming May 10.##
+## Major update comming May 10. ##
 
 1. Has new compiler made by **me**, _compiles, and embeddes bytecode EVERY time_.
 -1. Still has option for compiliation through **Luastatic** _by ers35_
