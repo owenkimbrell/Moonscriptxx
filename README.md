@@ -17,6 +17,10 @@ _**Moonscript++**_ >||< **Lynxish Assembler**
 
 **____________________**
 
+
+**_https://github.com/owenkimbrell/Visual-Studio-Code-Moonscript-Syntax_**
+
+
 ### Wiki : https://github.com/owenkimbrell/Moonscriptxx/wiki ###
 
 **___________________________________________**
